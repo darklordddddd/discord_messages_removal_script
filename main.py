@@ -11,13 +11,12 @@ block_length=50
 success_code=204
 delete_sleep=0.2
 
-print("clears all of your messages in a channel")
-print("in order for this script to work properly the channel id, auth token, and username id is required")
+print("in order for this script to work properly the username id, auth token, and channel id is required")
 username_id = input("username id: ")
 auth_token = input("auth token: ")
 channel_id = input("channel id: ")
 delete_from_all_users = True if input("delete messages from other users (y/n): ") == "y" else False
-print("deleting all messages in " + channel_id + " from username id " + username_id + "...") if delete_from_all_users == False else print("deleting all messages in " + channel_id + "...")
+print("deleting all messages in channel with id " + channel_id + " from username with id " + username_id + "...") if delete_from_all_users == False else print("deleting all messages in channel with id " + channel_id + "...")
 
 def get_message_block(auth, id, b_length, last=""):
     if not last:
@@ -62,6 +61,6 @@ while True:
         break
     
 end = datetime.now()
-print('all messages deleted, amount of scanned meaasges = ' + str(total_length) + ', elapsed time = (hh:mm:ss.ms) {}'.format(end - start))
+print('all messages deleted, amount of scanned messages = ' + str(total_length) + ', elapsed time = (hh:mm:ss.ms) {}'.format(end - start))
 print("press any key to exit...")
 sys.stdin.read(1)

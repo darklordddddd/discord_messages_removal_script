@@ -62,6 +62,6 @@ while True:
         break
     
 end = datetime.now()
-print('all messages deleted, amount of scanned meaasges = ' + str(total_length) + 'elapsed time = (hh:mm:ss.ms) {}'.format(end - start))
+print('all messages deleted, amount of scanned meaasges = ' + str(total_length) + ', elapsed time = (hh:mm:ss.ms) {}'.format(end - start))
 print("press any key to exit...")
 sys.stdin.read(1)

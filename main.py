@@ -10,6 +10,7 @@ total_length=0
 block_length=50
 success_code=204
 delete_sleep=0.2
+def_type=0
 
 print("in order for this script to work properly the username id, auth token, and channel id is required")
 username_id = input("username id: ")
@@ -33,21 +34,22 @@ def get_message_block(auth, id, b_length, last=""):
 def delete_message_block(auth, id, user, messages):
     global success_code
     for message in messages:
-        if delete_from_all_users:
-            while True:
-                r = requests.delete("http://canary.discordapp.com/api/v6/channels/" + id + "/messages/" + message["id"], headers={"authorization": auth})
-                if (r.status_code == success_code):
-                    break
-                sleep(delete_sleep)
-            
-        else:
-            if (message["author"]["id"] == user):
+        if (message["type"] == def_type):
+            if delete_from_all_users:
                 while True:
-                    r = requests.delete("http://canary.discordapp.com/api/v6/channels/" + id + "/messages/" + message["id"],
-                                headers={"authorization": auth})
+                    r = requests.delete("http://canary.discordapp.com/api/v6/channels/" + id + "/messages/" + message["id"], headers={"authorization": auth})
                     if (r.status_code == success_code):
                         break
                     sleep(delete_sleep)
+            
+            else:
+                if (message["author"]["id"] == user):
+                    while True:
+                        r = requests.delete("http://canary.discordapp.com/api/v6/channels/" + id + "/messages/" + message["id"],
+                                    headers={"authorization": auth})
+                        if (r.status_code == success_code):
+                            break
+                        sleep(delete_sleep)
 
 start = datetime.now()
 while True:
